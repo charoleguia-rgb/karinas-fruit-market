@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Karina’s Fruit Market | Venta de Frutas</title>
-  <meta name="description" content="Venta de frutas frescas: mango, plátano, palta y más. Pedidos por WhatsApp y delivery." />
+  <meta name="description" content="Venta de frutas frescas . Pedidos por WhatsApp y delivery." />
   <style>
     :root{
       --bg:#0b1220;
@@ -388,12 +388,33 @@
 
     // Productos (edita nombres, precios, emojis, unidad)
     const products = [
-      { id:"mango-haden", name:"Mango Haden", price:4.00, unit:"kg", category:"oferta", emoji:"🥭", note:"Dulce y jugoso" },
-      { id:"platano-isla", name:"Plátano Isla (gordito)", price:0.30, unit:"unidad", category:"oferta", emoji:"🍌", note:"Ideal para desayuno" },
-      { id:"palta", name:"Palta", price:7.50, unit:"kg", category:"fruta", emoji:"🥑", note:"Mantequillosa" },
-      { id:"mandarina", name:"Mandarina", price:3.80, unit:"kg", category:"fruta", emoji:"🍊", note:"Dulce y aromática" },
-      { id:"manzana", name:"Manzana", price:4.50, unit:"kg", category:"fruta", emoji:"🍎", note:"Crocante" },
-      { id:"pack-mixto", name:"Pack mixto (familia)", price:20.00, unit:"pack", category:"pack", emoji:"🧺", note:"Surtido de temporada" },
+      const products = [
+  { id:"platano-seda", name:"Plátano Seda", price:0.40, unit:"unidad", category:"fruta", emoji:"🍌", note:"S/ 40 el ciento" },
+  { id:"platano-isla", name:"Plátano Isla", price:0.30, unit:"unidad", category:"fruta", emoji:"🍌", note:"S/ 30 el ciento" },
+  { id:"platano-isla-rojo", name:"Plátano Isla Rojo", price:0.40, unit:"unidad", category:"fruta", emoji:"🍌", note:"S/ 40 el ciento" },
+
+  { id:"mandarina", name:"Mandarina", price:3.00, unit:"kg", category:"fruta", emoji:"🍊" },
+  { id:"naranja-huando", name:"Naranja Huando", price:3.00, unit:"kg", category:"fruta", emoji:"🍊" },
+  { id:"naranja-jugo", name:"Naranja de Jugo", price:3.00, unit:"kg", category:"fruta", emoji:"🍊" },
+
+  { id:"limon-tahiti", name:"Limón Tahití", price:3.00, unit:"kg", category:"fruta", emoji:"🍋" },
+  { id:"limon-sutil", name:"Limón Sutil", price:2.50, unit:"kg", category:"fruta", emoji:"🍋" },
+  { id:"limon-injerto", name:"Limón Injerto", price:2.00, unit:"kg", category:"fruta", emoji:"🍋" },
+
+  { id:"mango-haden", name:"Mango Haden", price:4.00, unit:"kg", category:"fruta", emoji:"🥭" },
+  { id:"mango-comun", name:"Mango Común", price:3.00, unit:"kg", category:"fruta", emoji:"🥭" },
+
+  { id:"papaya", name:"Papaya", price:3.00, unit:"kg", category:"fruta", emoji:"🍈" },
+  { id:"lucuma", name:"Lúcuma", price:4.00, unit:"kg", category:"fruta", emoji:"🍈" },
+
+  { id:"palta-fuerte", name:"Palta Fuerte", price:4.00, unit:"kg", category:"fruta", emoji:"🥑", note:"S/ 100 el ciento" },
+  { id:"palta-hass", name:"Palta Hass", price:3.00, unit:"kg", category:"fruta", emoji:"🥑", note:"S/ 80 el ciento" },
+
+  { id:"maracuya", name:"Maracuyá", price:2.50, unit:"kg", category:"fruta", emoji:"🍈" },
+  { id:"chirimoya", name:"Chirimoya", price:4.00, unit:"kg", category:"fruta", emoji:"🍈" },
+
+  { id:"aji-pilis", name:"Ají Pilis (frasco)", price:5.00, unit:"frasco", category:"otros", emoji:"🌶️" }
+];
     ];
 
     // ========= LÓGICA =========
@@ -662,3 +683,4 @@
 </body>
 </html>
 Subo página web Karina’s Fruit Market
+
