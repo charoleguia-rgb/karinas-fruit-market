@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Karina’s Fruit Market | Venta de Frutas</title>
+  <meta name="description" content="Venta de frutas frescas: mango, plátano, palta y más. Pedidos por WhatsApp y delivery." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a2e;
+      --muted:#98a2b3;
+      --text:#e6eaf2;
+      --accent:#22c55e;
+      --accent2:#60a5fa;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(34,197,94,.22), transparent 50%),
+                  radial-gradient(900px 700px at 100% 10%, rgba(96,165,250,.20), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.35;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+    header{
+      position:sticky; top:0; z-index:20;
+      background: rgba(11,18,32,.72);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      padding:14px 24px;
+      max-width:1100px; margin:0 auto;
+    }
+    .brand{display:flex; gap:10px; align-items:center}
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(96,165,250,.9));
+      display:grid; place-items:center;
+      box-shadow: var(--shadow);
+      font-weight:800;
+    }
+    .brand h1{margin:0; font-size:16px; letter-spacing:.2px}
+    .brand small{display:block; color:var(--muted); margin-top:2px}
+    .actions{display:flex; gap:10px; align-items:center}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .btn{
+      cursor:pointer;
+      border:0;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:700;
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      border:1px solid var(--border);
+      transition: transform .05s ease, background .2s ease;
+      display:inline-flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(34,197,94,.95), rgba(16,185,129,.90));
+      border-color: rgba(34,197,94,.35);
+    }
+    .btn.primary:hover{filter: brightness(1.03)}
+    .btn.danger{background: rgba(239,68,68,.12); border-color: rgba(239,68,68,.25)}
+    .hero{
+      padding:26px 0 10px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+    }
+    .card{
+      background: rgba(16,26,46,.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroCard{padding:20px}
+    .heroTitle{margin:0; font-size:28px; letter-spacing:-.3px}
+    .heroText{margin:10px 0 0; color:var(--muted)}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .badge{
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color: #dbe7ff;
+      background: rgba(255,255,255,.03);
+      font-size:13px;
+    }
+    .sideCard{padding:18px}
+    .sideCard h3{margin:0 0 10px; font-size:14px; color:#dbe7ff}
+    .kv{display:grid; grid-template-columns: 1fr; gap:8px; color:var(--muted); font-size:14px}
+    .kv strong{color:var(--text)}
+    .controls{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .6fr;
+      gap:12px;
+    }
+    input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline:none;
+    }
+    input::placeholder{color: rgba(152,162,179,.85)}
+    .sectionTitle{
+      margin:26px 0 12px;
+      display:flex; align-items:end; justify-content:space-between; gap:12px;
+    }
+    .sectionTitle h2{margin:0; font-size:18px}
+    .sectionTitle p{margin:0; color:var(--muted); font-size:14px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .product{
+      padding:14px;
+      border-radius: var(--radius);
+      background: rgba(16,26,46,.65);
+      border:1px solid var(--border);
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .thumb{
+      height:150px;
+      border-radius: var(--radius2);
+      border:1px solid var(--border);
+      background:
+        radial-gradient(600px 240px at 20% 0%, rgba(34,197,94,.28), transparent 55%),
+        radial-gradient(500px 260px at 90% 20%, rgba(96,165,250,.20), transparent 60%),
+        rgba(255,255,255,.03);
+      display:flex; align-items:center; justify-content:center;
+      font-size:44px;
+    }
+    .meta{display:flex; justify-content:space-between; gap:12px; align-items:start}
+    .meta h4{margin:0; font-size:16px}
+    .meta small{display:block; color:var(--muted); margin-top:4px}
+    .priceTag{
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(245,158,11,.12);
+      border:1px solid rgba(245,158,11,.25);
+      color:#ffd38a;
+      font-weight:800;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .row{display:flex; gap:10px; align-items:center; justify-content:space-between}
+    .qty{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.03);
+    }
+    .qty button{
+      width:28px; height:28px; border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;
+    }
+    .qty span{min-width:20px; text-align:center; font-weight:800}
+    .muted{color:var(--muted); font-size:13px}
+    footer{
+      margin-top:28px;
+      padding:18px 0 30px;
+      color: var(--muted);
+      font-size:13px;
+      border-top:1px solid var(--border);
+    }
+
+    /* Drawer carrito */
+    .overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      z-index:50;
+    }
+    .drawer{
+      position:fixed; top:0; right:0; height:100%; width:min(420px, 92vw);
+      background: rgba(11,18,32,.92);
+      border-left:1px solid var(--border);
+      backdrop-filter: blur(10px);
+      transform: translateX(100%);
+      transition: transform .2s ease;
+      z-index:60;
+      display:flex; flex-direction:column;
+    }
+    .drawer.open{transform: translateX(0)}
+    .overlay.open{display:block}
+    .drawerHeader{
+      padding:16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid var(--border);
+    }
+    .drawerHeader h3{margin:0; font-size:16px}
+    .drawerBody{padding:14px 16px; overflow:auto; flex:1}
+    .item{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      margin-bottom:10px;
+    }
+    .item .iThumb{
+      width:44px; height:44px; border-radius: 12px;
+      border:1px solid var(--border);
+      display:grid; place-items:center;
+      font-size:22px;
+      background: rgba(255,255,255,.03);
+    }
+    .item h4{margin:0; font-size:14px}
+    .item .line{color:var(--muted); font-size:12.5px; margin-top:4px}
+    .itemRight{margin-left:auto; text-align:right}
+    .drawerFooter{
+      padding:14px 16px;
+      border-top:1px solid var(--border);
+      display:grid; gap:10px;
+    }
+    .totals{
+      display:flex; align-items:center; justify-content:space-between;
+      color:#dbe7ff;
+      font-weight:800;
+    }
+    .note{color:var(--muted); font-size:12.5px}
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+      .controls{grid-template-columns:1fr}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 560px){
+      .grid{grid-template-columns: 1fr}
+      .heroTitle{font-size:24px}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">KF</div>
+        <div>
+          <h1>Karina’s Fruit Market</h1>
+          <small>Fruta fresca • Delivery • Pedidos por WhatsApp</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="pill" title="Horario">
+          <span>🕘</span><span id="hours">Lun–Dom 8:00–19:00</span>
+        </div>
+        <button class="btn" id="openCartBtn" type="button">
+          🛒 Carrito <span id="cartCount" style="opacity:.9;font-weight:900">0</span>
+        </button>
+        <a class="btn primary" id="whatsBtnTop" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="card heroCard">
+          <h2 class="heroTitle">Frutas frescas, precio claro y pedido rápido.</h2>
+          <p class="heroText">
+            Elige tus frutas, agrégalas al carrito y envía el pedido directo por WhatsApp. Sin vueltas: tú compras, yo entrego.
+          </p>
+
+          <div class="badges">
+            <span class="badge">Pago: efectivo / Yape / Plin</span>
+            <span class="badge">Delivery según zona</span>
+            <span class="badge">Atención el mismo día</span>
+          </div>
+
+          <div class="controls">
+            <input id="search" type="text" placeholder="Buscar (ej. mango, plátano, palta)..." />
+            <select id="category">
+              <option value="all">Todas las categorías</option>
+              <option value="fruta">Frutas</option>
+              <option value="oferta">Ofertas</option>
+              <option value="pack">Packs</option>
+            </select>
+            <select id="sort">
+              <option value="reco">Orden: recomendado</option>
+              <option value="priceAsc">Precio: menor a mayor</option>
+              <option value="priceDesc">Precio: mayor a menor</option>
+              <option value="nameAsc">Nombre: A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card sideCard">
+          <h3>Datos del negocio</h3>
+          <div class="kv">
+            <div><strong>Ciudad:</strong> Abancay (edítalo)</div>
+            <div><strong>Tel/WhatsApp:</strong> <span id="phoneLabel">+51 999 999 999</span></div>
+            <div><strong>Dirección:</strong> Av. ________ (opcional)</div>
+            <div><strong>Nota:</strong> <span class="muted">Puedes cambiar productos y precios dentro del código.</span></div>
+          </div>
+          <div style="height:12px"></div>
+          <button class="btn" id="quickAddOffer" type="button">⚡ Agregar oferta del día</button>
+          <div style="height:10px"></div>
+          <p class="note">
+            Consejo: cambia el número de WhatsApp para que el botón funcione. Si no lo cambias, no te quejes: el pedido se lo manda a “999 999 999”.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sectionTitle">
+      <div>
+        <h2>Catálogo</h2>
+        <p id="resultsCount">Mostrando productos</p>
+      </div>
+      <button class="btn" id="resetBtn" type="button">↺ Limpiar filtros</button>
+    </div>
+
+    <section class="grid" id="productsGrid"></section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <div>© <span id="year"></span> Karina’s Fruit Market</div>
+        <div>Hecho para vender frutas, no para decorarlo. Ajusta y publica.</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Carrito -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawerHeader">
+      <h3>Tu carrito</h3>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn danger" id="clearCartBtn" type="button">Vaciar</button>
+        <button class="btn" id="closeCartBtn" type="button">Cerrar ✕</button>
+      </div>
+    </div>
+    <div class="drawerBody" id="cartItems"></div>
+    <div class="drawerFooter">
+      <div class="totals">
+        <span>Total</span>
+        <span id="cartTotal">S/ 0.00</span>
+      </div>
+      <a class="btn primary" id="whatsBtn" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+      <div class="note">
+        El pedido se envía como mensaje con detalle. El precio final puede variar si hay delivery o cambios de stock.
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // ========= CONFIGURA AQUÍ =========
+    const BUSINESS_NAME = "Karina’s Fruit Market";
+    const WHATSAPP_NUMBER_E164 = "51999999999"; // <-- CAMBIA: ejemplo Perú +51 987654321 => "51987654321"
+    const CITY = "Abancay";
+    const HOURS_TEXT = "Lun–Dom 8:00–19:00";
+
+    // Productos (edita nombres, precios, emojis, unidad)
+    const products = [
+      { id:"mango-haden", name:"Mango Haden", price:4.00, unit:"kg", category:"oferta", emoji:"🥭", note:"Dulce y jugoso" },
+      { id:"platano-isla", name:"Plátano Isla (gordito)", price:0.30, unit:"unidad", category:"oferta", emoji:"🍌", note:"Ideal para desayuno" },
+      { id:"palta", name:"Palta", price:7.50, unit:"kg", category:"fruta", emoji:"🥑", note:"Mantequillosa" },
+      { id:"mandarina", name:"Mandarina", price:3.80, unit:"kg", category:"fruta", emoji:"🍊", note:"Dulce y aromática" },
+      { id:"manzana", name:"Manzana", price:4.50, unit:"kg", category:"fruta", emoji:"🍎", note:"Crocante" },
+      { id:"pack-mixto", name:"Pack mixto (familia)", price:20.00, unit:"pack", category:"pack", emoji:"🧺", note:"Surtido de temporada" },
+    ];
+
+    // ========= LÓGICA =========
+    const state = {
+      search: "",
+      category: "all",
+      sort: "reco",
+      cart: {} // id -> qty
+    };
+
+    const elGrid = document.getElementById("productsGrid");
+    const elResults = document.getElementById("resultsCount");
+    const elSearch = document.getElementById("search");
+    const elCategory = document.getElementById("category");
+    const elSort = document.getElementById("sort");
+    const elYear = document.getElementById("year");
+    const elHours = document.getElementById("hours");
+    const elPhoneLabel = document.getElementById("phoneLabel");
+
+    const overlay = document.getElementById("overlay");
+    const drawer = document.getElementById("drawer");
+    const openCartBtn = document.getElementById("openCartBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+    const clearCartBtn = document.getElementById("clearCartBtn");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartCount = document.getElementById("cartCount");
+    const whatsBtn = document.getElementById("whatsBtn");
+    const whatsBtnTop = document.getElementById("whatsBtnTop");
+
+    const resetBtn = document.getElementById("resetBtn");
+    const quickAddOffer = document.getElementById("quickAddOffer");
+
+    function formatMoney(n){
+      return "S/ " + n.toFixed(2);
+    }
+
+    function getFiltered(){
+      let list = [...products];
+
+      if(state.search.trim()){
+        const q = state.search.trim().toLowerCase();
+        list = list.filter(p =>
+          (p.name + " " + (p.note||"")).toLowerCase().includes(q)
+        );
+      }
+
+      if(state.category !== "all"){
+        list = list.filter(p => p.category === state.category);
+      }
+
+      switch(state.sort){
+        case "priceAsc":
+          list.sort((a,b)=>a.price-b.price); break;
+        case "priceDesc":
+          list.sort((a,b)=>b.price-a.price); break;
+        case "nameAsc":
+          list.sort((a,b)=>a.name.localeCompare(b.name)); break;
+        default:
+          // recomendado (como viene)
+          break;
+      }
+
+      return list;
+    }
+
+    function cartQty(id){ return state.cart[id] || 0; }
+
+    function setQty(id, qty){
+      if(qty <= 0) delete state.cart[id];
+      else state.cart[id] = qty;
+      renderCartBadge();
+      renderProducts(); // para refrescar contadores
+    }
+
+    function addOne(id){ setQty(id, cartQty(id) + 1); }
+    function removeOne(id){ setQty(id, cartQty(id) - 1); }
+
+    function renderProducts(){
+      const list = getFiltered();
+      elResults.textContent = `Mostrando ${list.length} producto(s) en ${CITY}`;
+      elGrid.innerHTML = "";
+
+      list.forEach(p=>{
+        const qty = cartQty(p.id);
+
+        const card = document.createElement("div");
+        card.className = "product";
+        card.innerHTML = `
+          <div class="thumb" aria-label="${p.name}">${p.emoji || "🍉"}</div>
+          <div class="meta">
+            <div>
+              <h4>${p.name}</h4>
+              <small>${p.note || ""}</small>
+            </div>
+            <div class="priceTag">${formatMoney(p.price)} / ${p.unit}</div>
+          </div>
+
+          <div class="row">
+            <div class="qty" aria-label="cantidad">
+              <button type="button" data-act="dec">−</button>
+              <span>${qty}</span>
+              <button type="button" data-act="inc">+</button>
+            </div>
+            <button class="btn" type="button" data-act="add">Agregar</button>
+          </div>
+          <div class="muted">Categoría: ${p.category}</div>
+        `;
+
+        card.querySelector('[data-act="inc"]').addEventListener("click", ()=>addOne(p.id));
+        card.querySelector('[data-act="dec"]').addEventListener("click", ()=>removeOne(p.id));
+        card.querySelector('[data-act="add"]').addEventListener("click", ()=>addOne(p.id));
+
+        elGrid.appendChild(card);
+      });
+    }
+
+    function renderCartBadge(){
+      const totalItems = Object.values(state.cart).reduce((a,b)=>a+b,0);
+      cartCount.textContent = totalItems;
+    }
+
+    function getCartLines(){
+      const lines = [];
+      let total = 0;
+
+      for(const [id, qty] of Object.entries(state.cart)){
+        const p = products.find(x=>x.id===id);
+        if(!p) continue;
+        const sub = p.price * qty;
+        total += sub;
+        lines.push({ p, qty, sub });
+      }
+      return { lines, total };
+    }
+
+    function renderCart(){
+      const { lines, total } = getCartLines();
+      cartItems.innerHTML = "";
+
+      if(lines.length === 0){
+        cartItems.innerHTML = `<div class="muted">Tu carrito está vacío. Así no se vende ni un plátano.</div>`;
+      } else {
+        lines.forEach(({p, qty, sub})=>{
+          const row = document.createElement("div");
+          row.className = "item";
+          row.innerHTML = `
+            <div class="iThumb">${p.emoji||"🍉"}</div>
+            <div>
+              <h4>${p.name}</h4>
+              <div class="line">${formatMoney(p.price)} / ${p.unit} • Cant: <strong>${qty}</strong></div>
+              <div class="line" style="margin-top:6px; display:flex; gap:8px; align-items:center;">
+                <button class="btn" style="padding:8px 10px" type="button" data-act="dec">−</button>
+                <button class="btn" style="padding:8px 10px" type="button" data-act="inc">+</button>
+                <button class="btn danger" style="padding:8px 10px" type="button" data-act="rm">Quitar</button>
+              </div>
+            </div>
+            <div class="itemRight">
+              <div style="font-weight:900">${formatMoney(sub)}</div>
+            </div>
+          `;
+          row.querySelector('[data-act="inc"]').addEventListener("click", ()=>{ addOne(p.id); renderCart(); updateWhatsLinks(); });
+          row.querySelector('[data-act="dec"]').addEventListener("click", ()=>{ removeOne(p.id); renderCart(); updateWhatsLinks(); });
+          row.querySelector('[data-act="rm"]').addEventListener("click", ()=>{ setQty(p.id, 0); renderCart(); updateWhatsLinks(); });
+
+          cartItems.appendChild(row);
+        });
+      }
+
+      cartTotal.textContent = formatMoney(total);
+      renderCartBadge();
+      updateWhatsLinks();
+    }
+
+    function openCart(){
+      overlay.classList.add("open");
+      drawer.classList.add("open");
+      renderCart();
+    }
+    function closeCart(){
+      overlay.classList.remove("open");
+      drawer.classList.remove("open");
+    }
+
+    function buildWhatsMessage(){
+      const { lines, total } = getCartLines();
+      const now = new Date();
+      const ts = now.toLocaleString("es-PE", { hour12:false });
+
+      if(lines.length === 0){
+        return `Hola, quiero información de sus frutas. (${ts})`;
+      }
+
+      const itemsText = lines.map(({p, qty, sub}) =>
+        `- ${p.name}: ${qty} (${p.unit}) = ${formatMoney(sub)}`
+      ).join("\n");
+
+      return `Hola, vengo de la web de ${BUSINESS_NAME}.\n` +
+             `Quiero pedir:\n${itemsText}\n\n` +
+             `Total: ${formatMoney(total)}\n` +
+             `Ciudad/Zona: ${CITY}\n` +
+             `Fecha y hora: ${ts}\n\n` +
+             `¿Me confirma stock y delivery? Gracias.`;
+    }
+
+    function updateWhatsLinks(){
+      const msg = encodeURIComponent(buildWhatsMessage());
+      const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${msg}`;
+      whatsBtn.href = url;
+      whatsBtnTop.href = url;
+    }
+
+    // Eventos
+    openCartBtn.addEventListener("click", openCart);
+    closeCartBtn.addEventListener("click", closeCart);
+    overlay.addEventListener("click", closeCart);
+
+    clearCartBtn.addEventListener("click", ()=>{
+      state.cart = {};
+      renderCart();
+      renderProducts();
+      updateWhatsLinks();
+    });
+
+    elSearch.addEventListener("input", (e)=>{
+      state.search = e.target.value;
+      renderProducts();
+    });
+
+    elCategory.addEventListener("change", (e)=>{
+      state.category = e.target.value;
+      renderProducts();
+    });
+
+    elSort.addEventListener("change", (e)=>{
+      state.sort = e.target.value;
+      renderProducts();
+    });
+
+    resetBtn.addEventListener("click", ()=>{
+      state.search = "";
+      state.category = "all";
+      state.sort = "reco";
+      elSearch.value = "";
+      elCategory.value = "all";
+      elSort.value = "reco";
+      renderProducts();
+    });
+
+    quickAddOffer.addEventListener("click", ()=>{
+      // Agrega 1 mango y 6 plátanos como “oferta del día”
+      addOne("mango-haden");
+      for(let i=0;i<6;i++) addOne("platano-isla");
+      renderProducts();
+      openCart();
+    });
+
+    // Init
+    elYear.textContent = new Date().getFullYear();
+    elHours.textContent = HOURS_TEXT;
+    elPhoneLabel.textContent = "+" + WHATSAPP_NUMBER_E164.replace(/^(\d{2})(\d{3})(\d{3})(\d{3})$/, "$1 $2 $3 $4"); // aproximado
+    updateWhatsLinks();
+    renderProducts();
+    renderCartBadge();
+  </script>
+</body>
+</html>
+Subo página web Karina’s Fruit Market
