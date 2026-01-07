@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KARINA´S FRUIT MARKET</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Poppins,Arial;background:#fff;color:#222}
+header{border-bottom:1px solid #e5e7eb}
+.container{max-width:1200px;margin:auto;padding:20px}
+.top{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{height:80px}
+h1{margin:0;font-size:28px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.hero p{color:#555}
+.btn{background:#16a34a;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;font-weight:600}
+.info{background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{border:1px solid #e5e7eb;border-radius:16px;overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover}
+.card div{padding:12px}
+.price{color:#16a34a;font-weight:700}
+footer{margin-top:40px;background:#16a34a;color:#fff;text-align:center;padding:20px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container top">
+    <img src="img/logo.png" class="logo">
+    <h1>KARINA´S FRUIT MARKET</h1>
+    <a class="btn" href="https://wa.me/51973491877">WhatsApp</a>
+  </div>
+</header>
+
+<section class="container hero">
+  <div>
+    <h2>Fruta fresca todos los días</h2>
+    <p>Abancay – Av. Arenas 1526<br>
+    Horario: 8:30 a.m – 8:30 p.m<br>
+    Pago: Yape</p>
+  </div>
+  <div class="info">
+    <p><b>Pedidos directos:</b><br>📲 973 491 877</p>
+  </div>
+</section>
+
+<section class="container">
+<h2>Catálogo</h2>
+<div class="grid">
+
+<div class="card"><img src="img/platano_seda.png"><div>Plátano seda<div class="price">S/0.40 | S/40 ciento</div></div></div>
+<div class="card"><img src="img/platano_isla.png"><div>Plátano isla<div class="price">S/0.30 | S/30 ciento</div></div></div>
+<div class="card"><img src="img/platano_rojo.png"><div>Plátano rojo<div class="price">S/0.40 | S/40 ciento</div></div></div>
+<div class="card"><img src="img/mandarina.png"><div>Mandarina<div class="price">S/3 kilo</div></div></div>
+<div class="card"><img src="img/naranja.png"><div>Naranja<div class="price">S/3 kilo</div></div></div>
+<div class="card"><img src="img/limontahiti.png"><div>Limón Tahití<div class="price">S/3 kilo</div></div></div>
+<div class="card"><img src="img/limon_sutil.png"><div>Limón sutil<div class="price">S/2.50 kilo</div></div></div>
+<div class="card"><img src="img/mangohaden.png"><div>Mango Haden<div class="price">S/4 kilo</div></div></div>
+<div class="card"><img src="img/papaya.png"><div>Papaya<div class="price">S/3 kilo</div></div></div>
+<div class="card"><img src="img/lucma.png"><div>Lúcuma<div class="price">S/4 kilo</div></div></div>
+<div class="card"><img src="img/maracuya.png"><div>Maracuyá<div class="price">S/2.50 kilo</div></div></div>
+<div class="card"><img src="img/paltafuerte.png"><div>Palta fuerte<div class="price">S/4 kilo | S/100 ciento</div></div></div>
+<div class="card"><img src="img/paltahass.png"><div>Palta Hass<div class="price">S/3 kilo | S/80 ciento</div></div></div>
+<div class="card"><img src="img/chirimoya.png"><div>Chirimoya<div class="price">S/4 kilo</div></div></div>
+
+</div>
+</section>
+
+<footer>
+© KARINA´S FRUIT MARKET – Abancay
+</footer>
+
+</body>
+</html>
