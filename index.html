@@ -1,77 +1,371 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KARINA´S FRUIT MARKET</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-body{margin:0;font-family:Poppins,Arial;background:#fff;color:#222}
-header{border-bottom:1px solid #e5e7eb}
-.container{max-width:1200px;margin:auto;padding:20px}
-.top{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
-.logo{height:80px}
-h1{margin:0;font-size:28px}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
-.hero p{color:#555}
-.btn{background:#16a34a;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;font-weight:600}
-.info{background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{border:1px solid #e5e7eb;border-radius:16px;overflow:hidden}
-.card img{width:100%;height:180px;object-fit:cover}
-.card div{padding:12px}
-.price{color:#16a34a;font-weight:700}
-footer{margin-top:40px;background:#16a34a;color:#fff;text-align:center;padding:20px}
-@media(max-width:800px){.hero{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KARINA´S FRUIT MARKET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
+  <style>
+    :root{
+      --bg:#ffffff;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --green:#16a34a;
+      --blue:#1877f2;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:18px}
+    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter: blur(10px);border-bottom:1px solid var(--border);z-index:50}
+    .topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;min-width:260px}
+    .logo{width:54px;height:54px;border-radius:14px;object-fit:cover;border:1px solid var(--border)}
+    .brand h1{margin:0;font-size:18px;font-weight:800;letter-spacing:.2px}
+    .brand p{margin:0;color:var(--muted);font-size:12px}
+    .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid var(--border);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:12px;background:#fff}
+    .btn{border:0;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .btn.green{background:var(--green);color:white}
+    .btn.blue{background:var(--blue);color:white}
+    .btn.ghost{background:#fff;border:1px solid var(--border);color:var(--text)}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start;margin-top:14px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card.pad{padding:16px}
+    .hero h2{margin:0 0 8px;font-size:26px;line-height:1.15}
+    .hero .sub{margin:0;color:var(--muted)}
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 10px;font-size:12px;color:var(--text)}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+    @media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:780px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:430px){.grid{grid-template-columns:1fr}}
+    .item{overflow:hidden}
+    .item img{width:100%;height:160px;object-fit:cover;display:block;background:#f3f4f6}
+    .item .body{padding:12px}
+    .item .name{font-weight:800;margin:0 0 6px}
+    .item .price{color:var(--green);font-weight:800}
+    .item .meta{color:var(--muted);font-size:12px;margin-top:6px}
+    .qtyrow{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .qtyrow input{width:90px;padding:8px 10px;border:1px solid var(--border);border-radius:12px;font-family:inherit}
+    .qtyrow select{padding:8px 10px;border:1px solid var(--border);border-radius:12px;font-family:inherit;background:#fff}
+    .small{font-size:12px;color:var(--muted)}
+    .cart{position:sticky;top:84px}
+    .cart h3{margin:0 0 10px}
+    .cartlist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+    .cartli{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--border);border-radius:14px;padding:10px;background:#fff}
+    .cartli b{display:block}
+    .tot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+    .tot .sum{font-size:18px;font-weight:900}
+    footer{margin:24px 0 10px;color:var(--muted);text-align:center;font-size:12px}
+    .danger{color:#b91c1c}
+  </style>
+</head>
+
+<body>
 <header>
-  <div class="container top">
-    <img src="img/logo.png" class="logo">
-    <h1>KARINA´S FRUIT MARKET</h1>
-    <a class="btn" href="https://wa.me/51973491877">WhatsApp</a>
+  <div class="container topbar">
+    <div class="brand">
+      <img class="logo" src="img/logo.png" alt="Logo">
+      <div>
+        <h1>KARINA´S FRUIT MARKET</h1>
+        <p>Fruta Fresca · Abancay · Pedidos por WhatsApp</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <span class="pill">Horario: 8:30 a.m – 8:30 p.m</span>
+      <span class="pill" id="cartPill">Carrito: 0</span>
+      <a class="btn blue" href="https://www.facebook.com/share/1AfKvrai1R/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+      <button class="btn green" id="btnSendTop">Enviar pedido</button>
+    </div>
   </div>
 </header>
 
-<section class="container hero">
-  <div>
-    <h2>Fruta Fresca Todos Los Días </h2>
-    <p>Abancay – Av. Arenas 1526<br>
-    Horario: 8:30 a.m – 8:30 p.m<br>
-    Pago: Yape</p>
-  </div>
-  <div class="info">
-    <p><b>Pedidos directos:</b><br>📲 973 491 877</p>
-  </div>
-</section>
+<main class="container">
+  <section class="hero">
+    <div class="card pad">
+      <h2>Elige tus frutas, pon cantidades y envía tu pedido.</h2>
+      <p class="sub">Dirección: <b>Abancay – Av. Arenas 1526</b> · Pago: <b>Yape</b> · WhatsApp: <b>973 491 877</b></p>
+      <div class="chips">
+        <span class="chip">Precios claros</span>
+        <span class="chip">Pedido por WhatsApp</span>
+        <span class="chip">Atención el mismo día</span>
+      </div>
+      <p class="small" style="margin-top:12px">
+        Tip: Si un producto es por kilo, el cliente puede pedir <b>0.5</b>, <b>1</b>, <b>2</b> kilos, etc.
+      </p>
+    </div>
 
-<section class="container">
-<h2>Catálogo</h2>
-<div class="grid">
+    <aside class="card pad cart">
+      <h3>Carrito</h3>
+      <ul class="cartlist" id="cartList"></ul>
 
-<div class="card"><img src="img/platano_seda.png"><div>Plátano seda<div class="price">S/0.40 CENTIMOS X UNID | S/40.00 SOLES X CIENTO </div></div></div>
-<div class="card"><img src="img/platano_isla.png"><div>Plátano isla<div class="price">S/0.30 CENTIMOS X UNID | S/30 SOLES X CIENTO </div></div></div>
-<div class="card"><img src="img/platano_rojo.png"><div>Plátano rojo<div class="price">S/0.40 CENTIMOS X UNID | S/40 SOLES X CIENTO </div></div></div>
-<div class="card"><img src="img/mandarina.png"><div>Mandarina<div class="price">S/3.00 SOLES X KILO </div></div></div>
-<div class="card"><img src="img/naranja.png"><div>Naranja<div class="price">S/3.00 X KILO </div></div></div>
-<div class="card"><img src="img/limontahiti.png"><div>limontahiti<div class="price">S/3.OO SOLES X KILO </div></div></div>
-<div class="card"><img src="img/limon_sutil.png"><div>Limón sutil<div class="price">S/2.50 SOLES  X KILO </div></div></div>
-<div class="card"><img src="img/mangohaden.png"><div>Mango Haden<div class="price">S/4.00 SOLES X KILO </div></div></div>
-<div class="card"><img src="img/papaya.png"><div>Papaya<div class="price">S/3.00 SOLES X KILO </div></div></div>
-<div class="card"><img src="img/lucma.png"><div>Lúcuma<div class="price">S/4.00 SOLES X KILO </div></div></div>
-<div class="card"><img src="img/maracuya.png"><div>Maracuyá<div class="price">S/2.50 SOLES X KILO </div></div></div>
-<div class="card"><img src="img/paltafuerte.png"><div>Palta fuerte<div class="price">S/4.00 SOLES X KILO | S/100.00 X CIENTO </div></div></div>
-<div class="card"><img src="img/paltahass.png"><div>Palta Hass<div class="price">S/3.00 SOLES X KILO | S/80 X CIENTO </div></div></div>
-<div class="card"><img src="img/chirimoya.png"><div>Chirimoya<div class="price">S/4.00 SOLES X KILO </div></div></div>
+      <div class="tot">
+        <div>
+          <div class="small">Total estimado</div>
+          <div class="sum" id="totalText">S/. 0.00</div>
+        </div>
+        <button class="btn green" id="btnSend">WhatsApp</button>
+      </div>
 
-</div>
-</section>
+      <div class="small" style="margin-top:10px">
+        Nota: El total es estimado según tus precios. Confirmas por WhatsApp.
+      </div>
+      <div class="small danger" id="warnMissing" style="display:none;margin-top:10px">
+      </div>
+    </aside>
+  </section>
 
-<footer>
-© KARINA´S FRUIT MARKET – Abancay
-</footer>
+  <section style="margin-top:14px">
+    <h2 style="margin:0 0 8px">Catálogo</h2>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>© KARINA´S FRUIT MARKET</footer>
+</main>
+
+<script>
+  // ====== CONFIGURA AQUÍ ======
+  const WHATSAPP_NUMBER = "51973491877"; // +51 973491877
+  const FACEBOOK_URL = "https://www.facebook.com/share/1AfKvrai1R/?mibextid=wwXIfr"
+
+  // Productos (precios en números para calcular total)
+  // unit: "kilo" o "unidad" o "frasco"
+  const products = [
+    { id:"platano_seda", name:"Plátano seda", img:"img/platano_seda.png", unit:"unidad", price:S/. 0.40 CENTIMOS X UNID , extra:"S/. 40.00 SOLES X CIENTO", hundred:40.00 },
+    { id:"platano_isla", name:"Plátano isla", img:"img/platano_isla.png", unit:"unidad", price:S7. 0.30 CENTIMOS X UNID , extra:"S/. 30.00 SOLES X CIENTO", hundred:30.00 },
+    { id:"platano_rojo", name:"Plátano isla rojo", img:"img/platano_rojo.png", unit:"unidad", price:S/. 0.40CENTIMOS X UNID , extra:"S/. 40.00 SOLES X CIENTO", hundred:40.00 },
+
+    { id:"mandarina", name:"Mandarina", img:"img/mandarina.png", unit:"kilo", price:S/. 3.00 X KILO  },
+    { id:"naranja_huando", name:"Naranja Huando", img:"img/naranja.png", unit:"kilo", price:S/. 3.00 X KILO  },
+    { id:"naranja_jugo", name:"Naranja de jugo", img:"img/naranja.png", unit:"kilo", price:S/. 3.00X KILO  },
+
+    // OJO: si tu archivo se llama limontaiti.png, cambia el img a ese nombre.
+    { id:"limon_tahiti", name:"Limón Tahití", img:"img/limon_tahiti.png", unit:"kilo", price:S/. 3.00  X KILO  },
+    { id:"limon_sutil", name:"Limón sutil", img:"img/limon_sutil.png", unit:"kilo", price:S/. 2.50 X KILO  },
+    { id:"limon_injerto", name:"Limón injerto", img:"img/limon_injerto.png", unit:"kilo", price:S/. 2.00 X KILO  },
+
+    { id:"mango_haden", name:"Mango Haden", img:"img/mangohaden.png", unit:"kilo", price:S/. 4.00 X KILO  },
+    { id:"mango_comun", name:"Mango común", img:"img/mangohaden.png", unit:"kilo", price:S/. 3.00 X KILO  },
+
+    { id:"papaya", name:"Papaya", img:"img/papaya.png", unit:"kilo", price:S/. 3.00 },
+    { id:"lucuma", name:"Lúcuma", img:"img/lucma.png", unit:"kilo", price:S/. 4.00 },
+
+    { id:"palta_fuerte", name:"Palta fuerte", img:"img/paltafuerte.png", unit:"kilo", price:S/. 4.00 X KILO , extra:"S/. 100.00  X CIENTO", hundred:100.00 },
+    { id:"palta_hass", name:"Palta Hass", img:"img/paltahass.png", unit:"kilo", price:S/. 3.00 X KILO , extra:"S/. 80.00 X CIENTO", hundred:80.00 },
+
+    { id:"maracuya", name:"Maracuyá", img:"img/maracuya.png", unit:"kilo", price:S/. 2.50 X KILO  },
+
+    // Si renombraste CHIRIMOYAS_.jpeg a chirimoya.png, perfecto.
+    { id:"chirimoya", name:"Chirimoya", img:"img/chirimoya.png", unit:"kilo", price:S/. 4.00 X KILO  },
+
+    { id:"aji_pilis", name:"Ají pilis (frasco)", img:"img/aji.png", unit:"frasco", price:S/ .5.00 X FRASCO }
+  ];
+
+  // ====== UI / CARRITO ======
+  const state = { cart: {} }; // id -> {qty, mode}
+  const grid = document.getElementById("grid");
+  const cartList = document.getElementById("cartList");
+  const totalText = document.getElementById("totalText");
+  const cartPill = document.getElementById("cartPill");
+  const warnMissing = document.getElementById("warnMissing");
+
+  // Set link facebook
+  document.querySelectorAll('a.btn.blue').forEach(a => a.href = FACEBOOK_URL);
+
+  function money(n){
+    return `S/. ${n.toFixed(2)}`;
+  }
+
+  function labelPrice(p){
+    if(p.unit === "kilo") return `S/. ${p.price.toFixed(2)} SOLES EL KILO`;
+    if(p.unit === "frasco") return `S/. ${p.price.toFixed(2)} SOLES EL FRASCO`;
+    return `S/. ${p.price.toFixed(2)} C/U`;
+  }
+
+  function addToCart(id, qty, mode){
+    if(!qty || qty <= 0){
+      delete state.cart[id];
+    } else {
+      state.cart[id] = { qty, mode };
+    }
+    renderCart();
+  }
+
+  function calcItem(p, line){
+    // mode: "KILO " o "CIENTO"
+    if(p.unit === "unidad" && line.mode === "ciento"){
+      const c = (p.hundred || 0);
+      return c * (line.qty/1); // qty aquí será número de "cientos"
+    }
+    return p.price * line.qty;
+  }
+
+  function renderCart(){
+    cartList.innerHTML = "";
+    let total = 0;
+    let count = 0;
+
+    const entries = Object.entries(state.cart);
+    if(entries.length === 0){
+      cartList.innerHTML = `<li class="small">Aún no agregas productos.</li>`;
+    } else {
+      for(const [id, line] of entries){
+        const p = products.find(x => x.id === id);
+        if(!p) continue;
+        const sub = calcItem(p, line);
+        total += sub;
+        count++;
+
+        const unitLabel =
+          (p.unit === "unidad" && line.mode === "ciento")
+          ? `${line.qty} ciento(s)`
+          : `${line.qty} ${p.unit === "kilo" ? "kg" : (p.unit === "frasco" ? "frasco(s)" : "unid.")}`;
+
+        cartList.insertAdjacentHTML("beforeend", `
+          <li class="cartli">
+            <div>
+              <b>${p.name}</b>
+              <div class="small">${unitLabel}</div>
+            </div>
+            <div style="text-align:right">
+              <b>${money(sub)}</b>
+              <button class="btn ghost" style="padding:6px 10px;font-size:12px" onclick="removeItem('${id}')">Quitar</button>
+            </div>
+          </li>
+        `);
+      }
+    }
+
+    totalText.textContent = money(total);
+    cartPill.textContent = `Carrito: ${count}`;
+  }
+
+  window.removeItem = (id) => {
+    delete state.cart[id];
+    // reset inputs in UI (opcional: no)
+    renderCart();
+  };
+
+  function renderGrid(){
+    grid.innerHTML = "";
+    products.forEach(p=>{
+      const hasHundred = (p.unit === "unidad" && typeof p.hundred === "number") || (p.unit === "kilo" && typeof p.hundred === "number");
+      const qtyStep = (p.unit === "kilo") ? "0.5" : "1";
+      const qtyMin  = (p.unit === "kilo") ? "0.5" : "1";
+
+      const modeSelect = (p.unit === "unidad")
+        ? `<select aria-label="modo" id="mode_${p.id}">
+             <option value="normal">Por unidad</option>
+             <option value="ciento">Por ciento</option>
+           </select>`
+        : `<select aria-label="modo" id="mode_${p.id}">
+             <option value="normal">Por ${p.unit === "kilo" ? "kilo" : p.unit}</option>
+           </select>`;
+
+      const extra = p.extra ? `<div class="meta">${p.extra}</div>` : "";
+
+      grid.insertAdjacentHTML("beforeend", `
+        <div class="card item">
+          <img src="${p.img}" alt="${p.name}" onerror="imgFail(this)">
+          <div class="body">
+            <div class="name">${p.name}</div>
+            <div class="price">${labelPrice(p)}</div>
+            ${extra}
+            <div class="qtyrow">
+              ${modeSelect}
+              <input id="qty_${p.id}" type="number" min="${qtyMin}" step="${qtyStep}" placeholder="${p.unit === "kilo" ? "kg" : "cant."}">
+              <button class="btn green" onclick="addFromUI('${p.id}')">Agregar</button>
+            </div>
+            <div class="small">Se enviará el pedido con detalle por WhatsApp.</div>
+          </div>
+        </div>
+      `);
+    });
+  }
+
+  window.imgFail = (img) => {
+    warnMissing.style.display = "block";
+    img.style.display = "none";
+  };
+
+  window.addFromUI = (id) => {
+    const p = products.find(x=>x.id===id);
+    const qtyEl = document.getElementById(`qty_${id}`);
+    const modeEl = document.getElementById(`mode_${id}`);
+
+    let qty = parseFloat(qtyEl.value);
+    const mode = modeEl ? modeEl.value : "normal";
+
+    // Si es por "ciento", interpretamos qty como "número de cientos"
+    // Ejemplo: 1 => 1 ciento
+    if(p && p.unit === "unidad" && mode === "ciento"){
+      qty = Math.max(1, Math.floor(qty || 0));
+      qtyEl.value = qty;
+    }
+
+    if(!qty || qty <= 0) return;
+    addToCart(id, qty, mode);
+  };
+
+  function buildWhatsAppMessage(){
+    const lines = [];
+    lines.push("Hola Karina’s Fruit Market, deseo hacer este pedido:");
+    lines.push("");
+    let total = 0;
+
+    for(const [id, line] of Object.entries(state.cart)){
+      const p = products.find(x=>x.id===id);
+      if(!p) continue;
+
+      let descQty = "";
+      if(p.unit === "unidad" && line.mode === "ciento"){
+        descQty = `${line.qty} ciento(s)`;
+      } else if(p.unit === "kilo"){
+        descQty = `${line.qty} kg`;
+      } else if(p.unit === "frasco"){
+        descQty = `${line.qty} frasco(s)`;
+      } else {
+        descQty = `${line.qty} unidad(es)`;
+      }
+
+      const sub = calcItem(p, line);
+      total += sub;
+      lines.push(`- ${p.name}: ${descQty} (${money(sub)})`);
+    }
+
+    lines.push("");
+    lines.push(`Total estimado: ${money(total)}`);
+    lines.push("Dirección de entrega / recojo: (escribir aquí)");
+    lines.push("Forma de pago: Yape");
+    return lines.join("\n");
+  }
+
+  function sendWhatsApp(){
+    const entries = Object.entries(state.cart);
+    if(entries.length === 0){
+      alert("Tu carrito está vacío.");
+      return;
+    }
+    const msg = buildWhatsAppMessage();
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+  }
+
+  document.getElementById("btnSend").addEventListener("click", sendWhatsApp);
+  document.getElementById("btnSendTop").addEventListener("click", sendWhatsApp);
+
+  renderGrid();
+  renderCart();
+</script>
 
 </body>
 </html>
