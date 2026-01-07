@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KARINA´S FRUIT MARKET | Abancay</title>
-  <meta name="description" content="Fruta fresca en Abancay. Pedidos por WhatsApp. Pago por Yape." />
+  <title>KARINA´S FRUIT MARKET</title>
+  <meta name="description" content="Fruta fresca en Abancay. Pedidos por WhatsApp. Yape." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,279 +14,218 @@
     :root{
       --bg:#ffffff;
       --text:#0f172a;
-      --muted:#475569;
-      --border:#e2e8f0;
+      --muted:#64748b;
+      --border:#e5e7eb;
       --card:#ffffff;
-      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --shadow: 0 10px 30px rgba(15,23,42,.08);
+      --radius:18px;
+      --radius2:14px;
       --green:#16a34a;
-      --green2:#22c55e;
       --blue:#2563eb;
       --chip:#f1f5f9;
-      --danger:#ef4444;
-      --radius:18px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
     }
-    a{color:inherit; text-decoration:none}
-
-    .wrap{max-width:1150px; margin:0 auto; padding:18px}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:18px}
     header{
       position:sticky; top:0; z-index:50;
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(10px);
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
       border-bottom:1px solid var(--border);
     }
     .topbar{
-      display:flex; gap:14px; align-items:center; justify-content:space-between;
-      padding:12px 18px;
-      max-width:1150px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 18px;
+      max-width:1200px; margin:0 auto;
     }
-    .brand{
-      display:flex; gap:12px; align-items:center; min-width:260px;
-    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px}
     .logo{
-      width:44px; height:44px; border-radius:12px;
-      border:1px solid var(--border);
-      object-fit:cover;
-      background:#fff;
+      width:44px;height:44px;border-radius:14px; border:1px solid var(--border);
+      display:grid;place-items:center; overflow:hidden; background:#fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+      flex:0 0 auto;
     }
-    .brand h1{
-      font-size:18px; margin:0; font-weight:800; letter-spacing:.4px;
-    }
-    .brand p{margin:0; font-size:12px; color:var(--muted)}
-    .actions{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .logo img{width:100%;height:100%;object-fit:cover}
+    .brand h1{font-size:18px;line-height:1.1;margin:0;font-weight:800;letter-spacing:.2px}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+    .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .pill{
-      padding:10px 12px;
       border:1px solid var(--border);
       background:#fff;
+      padding:8px 12px;
       border-radius:999px;
       font-size:12px;
       color:var(--muted);
-      display:flex; gap:8px; align-items:center;
+      display:flex; align-items:center; gap:8px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.04);
     }
     .btn{
       border:0;
-      border-radius:999px;
-      padding:11px 14px;
+      background:var(--green);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
       font-weight:700;
-      font-size:13px;
       cursor:pointer;
-      display:inline-flex; gap:8px; align-items:center;
-      box-shadow: 0 8px 18px rgba(2,6,23,.10);
+      box-shadow: 0 10px 20px rgba(22,163,74,.18);
+      display:flex; align-items:center; gap:8px;
+      font-size:13px;
+      white-space:nowrap;
     }
-    .btn-blue{background:var(--blue); color:#fff}
-    .btn-green{background:var(--green); color:#fff}
-    .btn-outline{
-      background:#fff; color:var(--text);
+    .btn.secondary{
+      background:var(--blue);
+      box-shadow: 0 10px 20px rgba(37,99,235,.18);
+    }
+    .btn.ghost{
+      background:#fff;
+      color:var(--text);
       border:1px solid var(--border);
-      box-shadow:none;
+      box-shadow: 0 10px 20px rgba(15,23,42,.06);
     }
 
     .hero{
       display:grid;
-      grid-template-columns: 1.6fr .9fr;
+      grid-template-columns: 1.4fr .9fr;
       gap:16px;
       align-items:stretch;
-      margin-top:18px;
+      margin-top:16px;
     }
     @media (max-width: 980px){
       .hero{grid-template-columns:1fr}
-      .brand{min-width:auto}
+      .brand{min-width:unset}
       .actions{justify-content:flex-start}
     }
-    .panel{
+    .card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
       padding:18px;
     }
-    .panel h2{
-      margin:0 0 6px 0;
-      font-size:28px;
-      line-height:1.05;
-      font-weight:800;
-    }
-    .panel .sub{
-      margin:0 0 12px 0;
-      color:var(--muted);
-    }
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0}
+    .hero h2{margin:0 0 6px;font-size:28px;line-height:1.1}
+    .sub{margin:0;color:var(--muted);font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .chip{
       background:var(--chip);
       border:1px solid var(--border);
+      color:#334155;
       padding:8px 10px;
       border-radius:999px;
       font-size:12px;
-      color:var(--muted);
-    }
-    .meta{
-      margin-top:10px;
-      display:flex; gap:12px; flex-wrap:wrap;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .meta b{color:var(--text)}
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
+      font-weight:600;
     }
 
-    .cartBox h3{margin:0 0 8px 0; font-size:18px}
-    .cartTotal{
-      display:flex; justify-content:space-between; align-items:baseline;
-      padding:12px; border-radius:14px;
-      border:1px solid var(--border);
-      background:#fff;
-      margin:10px 0 12px 0;
+    .gridHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-top:20px;
     }
-    .cartTotal .val{font-size:22px; font-weight:800}
+    .gridHead h3{margin:0;font-size:22px}
+    .gridHead .tools{display:flex; gap:10px; flex-wrap:wrap}
+    .input, .select{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      background:#fff;
+      min-width:220px;
+    }
+    .select{min-width:180px}
+
+    .catalog{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width:1100px){ .catalog{grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width:820px){ .catalog{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width:520px){ .catalog{grid-template-columns: 1fr;} }
+
+    .item{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#fff;
+      box-shadow: 0 10px 24px rgba(15,23,42,.06);
+      display:flex; flex-direction:column;
+    }
+    .thumb{height:150px; background:#f8fafc; display:block}
+    .thumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .content{padding:14px}
+    .name{margin:0 0 6px; font-weight:800; font-size:15px}
+    .price{margin:0 0 10px; color:#0f172a; font-size:12px; line-height:1.35}
+    .price strong{color:var(--green)}
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .qty{
+      width:100px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 10px;
+      font-size:13px;
+      background:#fff;
+    }
+    .unit{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 10px;
+      font-size:13px;
+      background:#fff;
+      min-width:170px;
+    }
+    .add{
+      flex:1 1 auto;
+      border:0;
+      border-radius:12px;
+      padding:10px 12px;
+      cursor:pointer;
+      background:#0f172a;
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+    }
+    .add:hover{filter:brightness(1.05)}
+    .small{font-size:11px;color:var(--muted);margin-top:8px}
+
+    .cartBox h4{margin:0 0 10px;font-size:16px}
     .cartList{display:flex; flex-direction:column; gap:10px; margin-top:10px}
     .cartItem{
       border:1px solid var(--border);
       border-radius:14px;
-      padding:10px;
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:8px;
+      padding:10px 10px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
       background:#fff;
     }
-    .cartItem small{color:var(--muted)}
+    .cartItem b{display:block;font-size:13px}
+    .cartItem span{display:block;font-size:12px;color:var(--muted)}
     .cartItem .rm{
       border:1px solid var(--border);
       background:#fff;
-      border-radius:12px;
-      padding:8px 10px;
+      border-radius:10px;
+      padding:6px 8px;
       cursor:pointer;
-      font-weight:700;
-    }
-    .empty{
-      padding:10px;
-      border-radius:14px;
-      border:1px dashed var(--border);
-      color:var(--muted);
-      background:#fff;
-      font-size:13px;
-    }
-
-    .sectionTitle{
-      margin:18px 0 10px 0;
-      font-size:26px;
       font-weight:800;
     }
-
-    .toolbar{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center;
-      padding:12px;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: var(--shadow);
+    .total{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:12px; padding-top:12px;
+      border-top:1px solid var(--border);
+      gap:10px;
     }
-    .input, .select{
-      padding:11px 12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      font-size:13px;
-      min-width:220px;
-      outline:none;
-    }
-    .select{min-width:180px}
-    .toolbar .btn{box-shadow:none}
-
-    .grid{
-      margin-top:12px;
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 1100px){ .grid{grid-template-columns: repeat(4, 1fr);} }
-    @media (max-width: 900px){ .grid{grid-template-columns: repeat(3, 1fr);} }
-    @media (max-width: 650px){ .grid{grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 420px){ .grid{grid-template-columns: 1fr;} }
-
-    .card{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      overflow:hidden;
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height: 320px;
-    }
-
-    /* Esto elimina la “distorsión”: imagen recortada parejo */
-    .media{
-      width:100%;
-      aspect-ratio: 4 / 3;   /* tarjetas iguales */
-      background:#f8fafc;
-      border-bottom:1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
-    .media img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      display:block;
-    }
-    .media .fallback{
-      font-size:12px;
-      color:var(--muted);
-      padding:10px;
-      text-align:center;
-    }
-
-    .body{
-      padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:1;
-    }
-    .name{font-weight:800; font-size:14px; margin:0}
-    .price{font-weight:800; color:var(--green); margin:0}
-    .muted{color:var(--muted); font-size:12px; margin:0}
-    .row{
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
-      margin-top:auto;
-    }
-    .qty{
-      width:110px;
-      padding:10px 10px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      font-size:13px;
-      outline:none;
-    }
-    .add{
-      flex:1;
-      padding:10px 12px;
-      border-radius:14px;
-      border:0;
-      background: var(--green2);
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
-    }
-
+    .total strong{font-size:18px}
     footer{
-      padding:22px 18px;
+      border-top:1px solid var(--border);
+      margin-top:22px;
+      padding:16px 0;
       color:var(--muted);
       font-size:12px;
       text-align:center;
@@ -295,328 +234,440 @@
 </head>
 
 <body>
-  <header>
-    <div class="topbar">
-      <div class="brand">
-        <img class="logo" src="img/logo.png" alt="Logo" onerror="this.style.display='none'">
-        <div>
-          <h1>KARINA´S FRUIT MARKET</h1>
-          <p>Fruta fresca · Abancay · Pedidos por WhatsApp</p>
-        </div>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" title="Logo">
+        <img id="logoImg" alt="Logo" />
       </div>
-
-      <div class="actions">
-        <div class="pill">Horario: 8:30 a.m – 8:30 p.m</div>
-        <div class="pill"><b id="cartCount">Carrito: 0</b></div>
-
-        <!-- https://www.facebook.com/share/1AfKvrai1R/?mibextid=wwXIfr -->
-        <a class="btn btn-blue" id="fbBtn" href="#" target="_blank" rel="noopener">Facebook</a>
-
-        <button class="btn btn-green" id="sendTop">Enviar pedido</button>
+      <div>
+        <h1>KARINA´S FRUIT MARKET</h1>
+        <p>Fruta Fresca · Abancay · Pedidos por WhatsApp</p>
       </div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="panel">
-        <h2>Elige tus frutas, pon cantidades y envía tu pedido.</h2>
-        <p class="sub">Precios claros. Tú eliges. Yo lo preparo. Se confirma por WhatsApp.</p>
+    <div class="actions">
+      <div class="pill" id="hoursPill">Horario: 8.30 a.m – 8.30 p.m</div>
+      <div class="pill" id="cartCountPill">Carrito: 0</div>
+      <a class="btn secondary" id="fbBtn" target="_blank" rel="noopener">Facebook</a>
+      <button class="btn" id="sendBtn">Enviar pedido</button>
+    </div>
+  </div>
+</header>
 
-        <div class="meta">
-          <div><b>Dirección:</b> ABANCAY – AV. ARENAS 1526</div>
-          <div><b>Pago:</b> Yape</div>
-          <div><b>WhatsApp:</b> 973 491 877</div>
-        </div>
-
-        <div class="chips">
-          <div class="chip">Fruta fresca</div>
-          <div class="chip">Atención el mismo día</div>
-          <div class="chip">Pedidos por WhatsApp</div>
-        </div>
-
-        <div class="note">
-          Tip: Si un producto es por kilo, puedes pedir <b>0.5</b>, <b>1</b>, <b>2</b> kilos, etc.
-          Si es por unidad, pon 1,2,3… Si es por ciento, pon 1 (=100), 2 (=200)…
-        </div>
+<main class="wrap">
+  <section class="hero">
+    <div class="card">
+      <h2>Elige tus frutas, pon cantidades y envía tu pedido.</h2>
+      <p class="sub">
+        Dirección: <b>ABANCAY - AV ARENAS 1526</b> · Pago: <b>Yape</b> · WhatsApp: <b>973491877</b>
+      </p>
+      <div class="chips">
+        <div class="chip">Precios claros</div>
+        <div class="chip">Pedido por WhatsApp</div>
+        <div class="chip">Atención el mismo día</div>
       </div>
+      <p class="small">
+        Tip: Si un producto es por kilo, puedes pedir 0.5, 1, 2 kilos, etc. Si es por ciento, coloca 1 = un ciento.
+      </p>
+    </div>
 
-      <aside class="panel cartBox">
-        <h3>Carrito</h3>
-
-        <div class="cartTotal">
-          <div>
-            <div style="color:var(--muted); font-size:12px;">Total estimado</div>
-            <div class="val" id="totalVal">S/. 0.00</div>
-          </div>
-          <button class="btn btn-green" id="sendRight" style="box-shadow:none;">WhatsApp</button>
+    <aside class="card cartBox">
+      <h4>Carrito</h4>
+      <div class="total">
+        <div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;">Total estimado</div>
+          <strong id="totalText">S/. 0.00</strong>
         </div>
+        <button class="btn" id="waBtn">WhatsApp</button>
+      </div>
+      <div class="cartList" id="cartList"></div>
+      <p class="small">Nota: El total es estimado según tus precios. Confirmas por WhatsApp.</p>
+    </aside>
+  </section>
 
-        <div id="cartList" class="cartList"></div>
-
-        <div class="note">
-          Nota: El total es estimado según tus precios. Confirmas por WhatsApp.
-        </div>
-      </aside>
-    </section>
-
-    <h3 class="sectionTitle">Catálogo</h3>
-
-    <div class="toolbar">
-      <input class="input" id="q" placeholder="Buscar (plátano, mango, limón…)" />
+  <div class="gridHead">
+    <div>
+      <h3>Catálogo</h3>
+      <div class="sub">Mostrando productos</div>
+    </div>
+    <div class="tools">
+      <input class="input" id="search" placeholder="Buscar (ej. mango, plátano, palta)..." />
       <select class="select" id="cat">
-        <option value="all">Todas</option>
+        <option value="all">Todas las categorías</option>
         <option value="platano">Plátanos</option>
-        <option value="citrico">Cítricos</option>
+        <option value="citricos">Cítricos</option>
         <option value="fruta">Frutas</option>
         <option value="otros">Otros</option>
       </select>
-      <button class="btn btn-outline" id="clear">Limpiar</button>
+      <button class="btn ghost" id="clearBtn">Limpiar filtros</button>
     </div>
+  </div>
 
-    <div id="grid" class="grid"></div>
-  </main>
+  <section class="catalog" id="catalog"></section>
+</main>
 
-  <footer>
-    © KARINA´S FRUIT MARKET · Hecho para vender (no para decorar).
-  </footer>
+<footer>© KARINA´S FRUIT MARKET</footer>
 
-  <script>
-    // ========= CONFIGURACIÓN (edítala cuando quieras) =========
-    const WHATSAPP = "973491877"; // sin +51
-    const FACEBOOK_URL = "#";     // pega tu link real aquí
+<script>
+  // ========= CONFIGURACIÓN =========
+  const WHATSAPP = "973491877"; // sin +51
+  const FACEBOOK_URL = "https://www.facebook.com/share/1AfKvrai1R/?mibextid=wwXIfr";
 
-    // Productos: unidad = "kilo" | "unidad" | "ciento" | "frasco"
-    const PRODUCTS = [
-      { id:"platano_seda", name:"Plátano seda", unit:"unidad", price:0.40, price2:40.00, label2:"el ciento", cat:"platano", img:"img/platano_seda.png" },
-      { id:"platano_isla", name:"Plátano isla", unit:"unidad", price:0.30, price2:30.00, label2:"el ciento", cat:"platano", img:"img/platano_isla.png" },
-      { id:"platano_rojo", name:"Plátano isla rojo", unit:"unidad", price:0.40, price2:40.00, label2:"el ciento", cat:"platano", img:"img/platano_isla rojo.png" },
+  // Para evitar problemas por espacios en nombres, usamos encodeURI() al cargar imágenes.
 
-      { id:"mandarina", name:"Mandarina", unit:"kilo", price:3.00, cat:"citrico", img:"img/mandarina.png" },
-      { id:"naranja_huando", name:"Naranja Huando", unit:"kilo", price:3.00, cat:"citrico", img:"img/naranja.png" },
-      { id:"naranja_jugo", name:"Naranja de jugo", unit:"kilo", price:3.00, cat:"citrico", img:"img/naranja.png" },
+  // ========= IMÁGENES (NOMBRES EXACTOS COMO TU LISTA) =========
+  const IMAGES = {
+    logo: "img/logo.png",
 
-      { id:"limon_tahiti", name:"Limón Tahití", unit:"kilo", price:3.00, cat:"citrico", img:"img/limontahiti.png" },
-      { id:"limon_sutil", name:"Limón sutil", unit:"kilo", price:2.50, cat:"citrico", img:"img/limon sutil.png" },
-      { id:"limon_injeto", name:"Limón injerto", unit:"kilo", price:2.00, cat:"citrico", img:"img/limoninjeto.png" },
+    chirimoya: "img/CHIRIMOYAS_.png",
+    limon_sutil: "img/limon sutil.png",
+    limon_injeto: "img/limoninjeto.png",
+    limon_tahiti: "img/limontahiti.png",
+    lucma: "img/lucma.png",
+    mandarina: "img/mandarina.png",
+    mango_haden: "img/mangohaden.png",
+    maracuya: "img/maracuya.png",
+    naranja: "img/naranja.png",
+    palta_fuerte: "img/paltafuerte.png",
+    palta_hass: "img/paltahass.png",
+    papaya: "img/papaya.png",
+    platano_isla_rojo: "img/platano_isla rojo.png",
+    platano_isla: "img/platano_isla.png",
+    platano_seda: "img/platano_seda.png"
+    ajipili: "img/ajipili.png"
+  };
 
-      { id:"mango_haden", name:"Mango Haden", unit:"kilo", price:4.00, cat:"fruta", img:"img/mangohaden.png" },
-      { id:"mango_comun", name:"Mango común", unit:"kilo", price:3.00, cat:"fruta", img:"img/mangohaden.png" },
+  // ========= PRODUCTOS =========
+  // unitOptions permite seleccionar: kilo/ciento/unidad/frasco según aplique
+  const PRODUCTS = [
+    {
+      id:"platano_seda", name:"Plátano seda", cat:"platano",
+      img: IMAGES.platano_seda,
+      unitOptions:[
+        { key:"unidad", label:"UNIDAD", price:0.40 },
+        { key:"ciento", label:"CIENTO", price:40.00 }
+      ]
+    },
+    {
+      id:"platano_isla", name:"Plátano isla", cat:"platano",
+      img: IMAGES.platano_isla,
+      unitOptions:[
+        { key:"unidad", label:"UNIDAD", price:0.30 },
+        { key:"ciento", label:"CIENTO", price:30.00 }
+      ]
+    },
+    {
+      id:"platano_isla_rojo", name:"Plátano de isla rojo", cat:"platano",
+      img: IMAGES.platano_isla_rojo,
+      unitOptions:[
+        { key:"unidad", label:"UNIDAD", price:0.40 },
+        { key:"ciento", label:"CIENTO", price:40.00 }
+      ]
+    },
 
-      { id:"papaya", name:"Papaya", unit:"kilo", price:3.00, cat:"fruta", img:"img/papaya.png" },
-      { id:"lucuma", name:"Lúcuma", unit:"kilo", price:4.00, cat:"fruta", img:"img/lucma.png" },
+    { id:"mandarina", name:"Mandarina", cat:"citricos", img: IMAGES.mandarina,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
+    { id:"naranja_huando", name:"Naranja Huando", cat:"citricos", img: IMAGES.naranja,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
+    { id:"naranja_jugo", name:"Naranja de jugo", cat:"citricos", img: IMAGES.naranja,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
 
-      { id:"palta_fuerte", name:"Palta Fuerte", unit:"kilo", price:4.00, price2:100.00, label2:"el ciento", cat:"fruta", img:"img/paltafuerte.png" },
-      { id:"palta_hass", name:"Palta Hass", unit:"kilo", price:3.00, price2:80.00, label2:"el ciento", cat:"fruta", img:"img/paltahass.png" },
+    { id:"limon_tahiti", name:"Limón Tahití", cat:"citricos", img: IMAGES.limon_tahiti,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
+    { id:"limon_sutil", name:"Limón sutil", cat:"citricos", img: IMAGES.limon_sutil,
+      unitOptions:[{ key:"kilo", label:"KILO", price:2.50 }]
+    },
+    { id:"limon_injeto", name:"Limón injerto", cat:"citricos", img: IMAGES.limon_injeto,
+      unitOptions:[{ key:"kilo", label:"KILO", price:2.00 }]
+    },
 
-      { id:"maracuya", name:"Maracuyá", unit:"kilo", price:2.50, cat:"fruta", img:"img/maracuya.png" },
-      { id:"chirimoya", name:"Chirimoya", unit:"kilo", price:4.00, cat:"fruta", img:"img/CHIRIMOYAS_.png" },
+    { id:"mango_haden", name:"Mango Haden", cat:"fruta", img: IMAGES.mango_haden,
+      unitOptions:[{ key:"kilo", label:"KILO", price:4.00 }]
+    },
+    // No subiste imagen "mango comun", así que uso la de Mango Haden para que no salga roto.
+    { id:"mango_comun", name:"Mango común", cat:"fruta", img: IMAGES.mango_haden,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
 
-      { id:"aji_pilis", name:"Ají pilis", unit:"frasco", price:5.00, cat:"otros", img:"img/logo.png" },
-    ];
+    { id:"papaya", name:"Papaya", cat:"fruta", img: IMAGES.papaya,
+      unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
+    },
+    { id:"lucma", name:"Lúcuma", cat:"fruta", img: IMAGES.lucma,
+      unitOptions:[{ key:"kilo", label:"KILO", price:4.00 }]
+    },
 
-    // ========= UTIL =========
-    const money = (n)=>`S/. ${Number(n).toFixed(2)}`;
-    const unitLabel = (u)=>{
-      if(u==="kilo") return "soles el kilo";
-      if(u==="unidad") return "soles la unidad";
-      if(u==="ciento") return "soles el ciento";
-      if(u==="frasco") return "soles el frasco";
-      return "soles";
+    { id:"palta_fuerte", name:"Palta Fuerte", cat:"fruta", img: IMAGES.palta_fuerte,
+      unitOptions:[
+        { key:"kilo", label:"KILO", price:4.00 },
+        { key:"ciento", label:"CIENTO", price:100.00 }
+      ]
+    },
+    { id:"palta_hass", name:"Palta Hass", cat:"fruta", img: IMAGES.palta_hass,
+      unitOptions:[
+        { key:"kilo", label:"KILO", price:3.00 },
+        { key:"ciento", label:"CIENTO", price:80.00 }
+      ]
+    },
+
+    { id:"maracuya", name:"Maracuyá", cat:"fruta", img: IMAGES.maracuya,
+      unitOptions:[{ key:"kilo", label:"KILO", price:2.50 }]
+    },
+    { id:"chirimoya", name:"Chirimoya", cat:"fruta", img: IMAGES.chirimoya,
+      unitOptions:[{ key:"kilo", label:"KILO", price:4.00 }]
+    },
+
+    },
+    { id:"aji_pilis", name:"Ají pilis", cat:"otros", img: IMAGE.ajipili,
+      unitOptions:[{ key:"frasco", label:"FRASCO", price:5.00 }]
     }
+  ];
 
-    // ========= ESTADO =========
-    const cart = new Map(); // id -> {product, qty, mode}
-    const $ = (q)=>document.querySelector(q);
+  // ========= UTILIDADES =========
+  const money = (n)=>`S/. ${Number(n).toFixed(2)}`;
+  const labelPrice = (opt)=>{
+    const u = opt.key;
+    if(u==="kilo") return `${money(opt.price)} SOLES EL KILO`;
+    if(u==="ciento") return `${money(opt.price)} SOLES EL CIENTO`;
+    if(u==="unidad") return `${money(opt.price)} SOLES LA UNIDAD`;
+    if(u==="frasco") return `${money(opt.price)} SOLES EL FRASCO`;
+    return `${money(opt.price)}`;
+  };
+  const safeImg = (p)=> encodeURI(p); // mantiene los nombres tal cual, pero los hace URL-safe
 
-    // ========= RENDER =========
-    function priceText(p){
-      // si tiene price2, lo mostramos como “S/. x.xx soles la unidad · S/. y.yy soles el ciento”
-      if(typeof p.price2 === "number"){
-        const first = `${money(p.price)} ${unitLabel(p.unit)}`;
-        const second = `${money(p.price2)} ${p.label2 || "el ciento"}`;
-        return `${first} · ${second}`;
+  // ========= ESTADO =========
+  let cart = []; // {id, name, unitKey, unitLabel, price, qty, lineTotal}
+  let q = "";
+  let cat = "all";
+
+  // ========= ELEMENTOS =========
+  const catalogEl = document.getElementById("catalog");
+  const cartListEl = document.getElementById("cartList");
+  const totalTextEl = document.getElementById("totalText");
+  const cartCountPill = document.getElementById("cartCountPill");
+  const waBtn = document.getElementById("waBtn");
+  const sendBtn = document.getElementById("sendBtn");
+  const fbBtn = document.getElementById("fbBtn");
+  const logoImg = document.getElementById("logoImg");
+
+  // Set links / assets
+  fbBtn.href = FACEBOOK_URL;
+  logoImg.src = safeImg(IMAGES.logo);
+
+  // ========= RENDER CATÁLOGO =========
+  function filteredProducts(){
+    return PRODUCTS.filter(p=>{
+      const okQ = (p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
+      const okC = (cat==="all" ? true : p.cat===cat);
+      return okQ && okC;
+    });
+  }
+
+  function renderCatalog(){
+    const list = filteredProducts();
+    catalogEl.innerHTML = "";
+
+    list.forEach(p=>{
+      const el = document.createElement("article");
+      el.className = "item";
+
+      const thumb = document.createElement("div");
+      thumb.className = "thumb";
+      const img = document.createElement("img");
+      img.alt = p.name;
+      img.loading = "lazy";
+      img.src = safeImg(p.img);
+      thumb.appendChild(img);
+
+      const content = document.createElement("div");
+      content.className = "content";
+
+      const name = document.createElement("p");
+      name.className = "name";
+      name.textContent = p.name;
+
+      // Texto de precios (muestra todas las opciones)
+      const price = document.createElement("p");
+      price.className = "price";
+      price.innerHTML = p.unitOptions.map(o => `• <strong>${labelPrice(o)}</strong>`).join("<br>");
+
+      const row = document.createElement("div");
+      row.className = "row";
+
+      const qty = document.createElement("input");
+      qty.type = "number";
+      qty.min = "0";
+      qty.step = "0.1";
+      qty.value = (p.unitOptions.some(o=>o.key==="unidad"||o.key==="ciento"||o.key==="frasco")) ? "1" : "1";
+      qty.className = "qty";
+      qty.placeholder = "Cantidad";
+
+      const unit = document.createElement("select");
+      unit.className = "unit";
+      p.unitOptions.forEach(o=>{
+        const opt = document.createElement("option");
+        opt.value = o.key;
+        opt.textContent = `Comprar por ${o.label}`;
+        unit.appendChild(opt);
+      });
+
+      // Ajusta step según unidad
+      function adjustStep(){
+        const uk = unit.value;
+        if(uk==="kilo"){ qty.step="0.1"; qty.min="0.1"; if(Number(qty.value)<=0) qty.value="1"; }
+        else { qty.step="1"; qty.min="1"; qty.value = String(Math.max(1, Math.round(Number(qty.value)||1))); }
       }
-      return `${money(p.price)} ${unitLabel(p.unit)}`;
-    }
+      unit.addEventListener("change", adjustStep);
+      adjustStep();
 
-    function renderGrid(){
-      const q = $("#q").value.trim().toLowerCase();
-      const cat = $("#cat").value;
+      const add = document.createElement("button");
+      add.className = "add";
+      add.textContent = "Agregar";
 
-      const items = PRODUCTS.filter(p=>{
-        const okCat = (cat==="all") ? true : (p.cat===cat);
-        const okQ = !q ? true : (p.name.toLowerCase().includes(q));
-        return okCat && okQ;
+      add.addEventListener("click", ()=>{
+        const uk = unit.value;
+        const opt = p.unitOptions.find(o=>o.key===uk);
+        if(!opt) return;
+
+        let n = Number(qty.value);
+        if(!Number.isFinite(n) || n<=0) return;
+
+        if(uk!=="kilo") n = Math.round(n); // unidad/ciento/frasco enteros
+
+        const lineTotal = opt.price * n;
+
+        cart.push({
+          id:p.id,
+          name:p.name,
+          unitKey: uk,
+          unitLabel: opt.label,
+          price: opt.price,
+          qty: n,
+          lineTotal
+        });
+        renderCart();
       });
 
-      const grid = $("#grid");
-      grid.innerHTML = "";
+      row.appendChild(qty);
+      row.appendChild(unit);
+      row.appendChild(add);
 
-      items.forEach(p=>{
-        const card = document.createElement("div");
-        card.className = "card";
+      const small = document.createElement("div");
+      small.className = "small";
+      small.textContent = (p.unitOptions.some(o=>o.key==="ciento") && p.unitOptions.some(o=>o.key==="unidad"))
+        ? "Tip: 1 = una unidad / 1 = un ciento (según lo que elijas)."
+        : " ";
 
-        const media = document.createElement("div");
-        media.className = "media";
+      content.appendChild(name);
+      content.appendChild(price);
+      content.appendChild(row);
+      content.appendChild(small);
 
-        const img = document.createElement("img");
-        img.alt = p.name;
-        img.src = p.img;
-        img.onerror = ()=> {
-          media.innerHTML = `<div class="fallback">Imagen no disponible<br><small>${p.img}</small></div>`;
-        };
+      el.appendChild(thumb);
+      el.appendChild(content);
+      catalogEl.appendChild(el);
+    });
+  }
 
-        media.appendChild(img);
+  // ========= RENDER CARRITO =========
+  function renderCart(){
+    cartListEl.innerHTML = "";
 
-        const body = document.createElement("div");
-        body.className = "body";
+    const total = cart.reduce((a,b)=>a + b.lineTotal, 0);
+    totalTextEl.textContent = money(total);
 
-        body.innerHTML = `
-          <p class="name">${p.name}</p>
-          <p class="price">${priceText(p)}</p>
-          <p class="muted">Elige cantidad y agrega al carrito.</p>
-        `;
+    cartCountPill.textContent = `Carrito: ${cart.length}`;
 
-        const row = document.createElement("div");
-        row.className = "row";
-
-        const qty = document.createElement("input");
-        qty.className = "qty";
-        qty.type = "number";
-        qty.min = "0";
-        qty.step = (p.unit==="kilo") ? "0.5" : "1";
-        qty.placeholder = (p.unit==="kilo") ? "Ej: 1.5" : "Ej: 2";
-        qty.value = (p.unit==="kilo") ? "1" : "1";
-
-        const add = document.createElement("button");
-        add.className = "add";
-        add.textContent = "Agregar";
-
-        add.onclick = ()=>{
-          const v = Number(qty.value);
-          if(!v || v<=0) return;
-
-          // guardamos qty
-          cart.set(p.id, { product:p, qty:v });
-          renderCart();
-        };
-
-        row.appendChild(qty);
-        row.appendChild(add);
-        body.appendChild(row);
-
-        card.appendChild(media);
-        card.appendChild(body);
-
-        grid.appendChild(card);
-      });
+    if(cart.length===0){
+      const empty = document.createElement("div");
+      empty.className = "small";
+      empty.textContent = "Tu carrito está vacío. Agrega productos para enviar tu pedido.";
+      cartListEl.appendChild(empty);
+      return;
     }
 
-    function estimateLine(item){
-      const p = item.product;
-      const qty = item.qty;
+    cart.forEach((c, idx)=>{
+      const el = document.createElement("div");
+      el.className = "cartItem";
 
-      // Si el producto tiene precio2 “el ciento” y el usuario pide cantidades enteras
-      // NO adivino: calculo con precio principal (unidad o kilo) y dejo el "ciento" como referencia.
-      // Esto evita errores.
-      let lineTotal = qty * p.price;
+      const left = document.createElement("div");
+      const b = document.createElement("b");
+      b.textContent = c.name;
+      const s = document.createElement("span");
+      s.textContent = `${c.qty} x ${c.unitLabel} · ${money(c.price)} c/u · Subtotal: ${money(c.lineTotal)}`;
+      left.appendChild(b);
+      left.appendChild(s);
 
-      return lineTotal;
-    }
-
-    function renderCart(){
-      $("#cartCount").textContent = `Carrito: ${cart.size}`;
-
-      const list = $("#cartList");
-      list.innerHTML = "";
-
-      if(cart.size===0){
-        list.innerHTML = `<div class="empty">Tu carrito está vacío. Agrega productos del catálogo.</div>`;
-        $("#totalVal").textContent = money(0);
-        return;
-      }
-
-      let total = 0;
-
-      cart.forEach((item, id)=>{
-        const p = item.product;
-        const qty = item.qty;
-
-        const line = estimateLine(item);
-        total += line;
-
-        const div = document.createElement("div");
-        div.className = "cartItem";
-        div.innerHTML = `
-          <div>
-            <div style="font-weight:800;">${p.name}</div>
-            <small>${qty} ${(p.unit==="kilo") ? "kg" : (p.unit==="frasco" ? "frasco(s)" : "unidad(es)")} · ${priceText(p)}</small>
-          </div>
-        `;
-
-        const rm = document.createElement("button");
-        rm.className = "rm";
-        rm.textContent = "Quitar";
-        rm.onclick = ()=>{
-          cart.delete(id);
-          renderCart();
-        };
-
-        div.appendChild(rm);
-        list.appendChild(div);
+      const rm = document.createElement("button");
+      rm.className = "rm";
+      rm.textContent = "X";
+      rm.title = "Quitar";
+      rm.addEventListener("click", ()=>{
+        cart.splice(idx,1);
+        renderCart();
       });
 
-      $("#totalVal").textContent = money(total);
-    }
+      el.appendChild(left);
+      el.appendChild(rm);
+      cartListEl.appendChild(el);
+    });
+  }
 
-    function buildWhatsAppMessage(){
-      const lines = [];
-      lines.push("Hola, quiero hacer este pedido:");
-      lines.push("");
+  // ========= WHATSAPP =========
+  function buildWhatsAppMessage(){
+    const lines = [];
+    lines.push("Hola, quiero hacer este pedido:");
+    lines.push("");
 
-      cart.forEach((item)=>{
-        const p = item.product;
-        const qty = item.qty;
-        const u = (p.unit==="kilo") ? "kg" : (p.unit==="frasco" ? "frasco(s)" : "unidad(es)");
-        lines.push(`• ${p.name} — ${qty} ${u}`);
-        lines.push(`  Precio: ${priceText(p)}`);
-      });
-
-      lines.push("");
-      lines.push("Dirección: ABANCAY – AV. ARENAS 1526");
-      lines.push("Pago: Yape");
-      lines.push("Horario: 8:30 a.m – 8:30 p.m");
-
-      return lines.join("\n");
-    }
-
-    function sendWhatsApp(){
-      if(cart.size===0){
-        alert("Tu carrito está vacío. Agrega frutas primero.");
-        return;
-      }
-      const msg = encodeURIComponent(buildWhatsAppMessage());
-      const url = `https://wa.me/51${WHATSAPP}?text=${msg}`;
-      window.open(url, "_blank", "noopener");
-    }
-
-    // ========= INIT =========
-    $("#fbBtn").href = FACEBOOK_URL;https://charoleguia-rgb.github.io/karinas-fruit-market/?v=9999
-
-    $("#q").addEventListener("input", renderGrid);
-    $("#cat").addEventListener("change", renderGrid);
-    $("#clear").addEventListener("click", ()=>{
-      $("#q").value = "";
-      $("#cat").value = "all";
-      renderGrid();
+    cart.forEach((c,i)=>{
+      lines.push(`${i+1}) ${c.name} — ${c.qty} ${c.unitLabel} — ${money(c.lineTotal)}`);
     });
 
-    $("#sendTop").addEventListener("click", sendWhatsApp);
-    $("#sendRight").addEventListener("click", sendWhatsApp);
+    const total = cart.reduce((a,b)=>a + b.lineTotal, 0);
+    lines.push("");
+    lines.push(`TOTAL ESTIMADO: ${money(total)}`);
+    lines.push("");
+    lines.push("Dirección/Referencia (cliente): ____________________");
+    lines.push("Gracias.");
+    return lines.join("\n");
+  }
 
-    renderGrid();
-    renderCart();
-  </script>
+  function openWhatsApp(){
+    if(cart.length===0){
+      alert("Primero agrega productos al carrito.");
+      return;
+    }
+    const text = encodeURIComponent(buildWhatsAppMessage());
+    const url = `https://wa.me/51${WHATSAPP}?text=${text}`;
+    window.open(url, "_blank");
+  }
+
+  waBtn.addEventListener("click", openWhatsApp);
+  sendBtn.addEventListener("click", openWhatsApp);
+
+  // ========= FILTROS =========
+  document.getElementById("search").addEventListener("input", (e)=>{
+    q = e.target.value.trim().toLowerCase();
+    renderCatalog();
+  });
+  document.getElementById("cat").addEventListener("change", (e)=>{
+    cat = e.target.value;
+    renderCatalog();
+  });
+  document.getElementById("clearBtn").addEventListener("click", ()=>{
+    document.getElementById("search").value = "";
+    document.getElementById("cat").value = "all";
+    q=""; cat="all";
+    renderCatalog();
+  });
+
+  // ========= INIT =========
+  renderCatalog();
+  renderCart();
+</script>
 </body>
 </html>
