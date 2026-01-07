@@ -22,7 +22,9 @@
       --radius2:14px;
       --green:#16a34a;
       --blue:#2563eb;
+      --dark:#0f172a;
       --chip:#f1f5f9;
+      --danger:#ef4444;
     }
     *{box-sizing:border-box}
     body{
@@ -71,7 +73,7 @@
       color:#fff;
       padding:10px 14px;
       border-radius:12px;
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
       box-shadow: 0 10px 20px rgba(22,163,74,.18);
       display:flex; align-items:center; gap:8px;
@@ -120,6 +122,7 @@
       font-size:12px;
       font-weight:600;
     }
+    .small{font-size:11px;color:var(--muted);margin-top:8px}
 
     .gridHead{
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
@@ -167,37 +170,48 @@
     .price strong{color:var(--green)}
     .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .qty{
-      width:100px;
+      width:120px;
       border:1px solid var(--border);
       border-radius:12px;
       padding:10px 10px;
       font-size:13px;
       background:#fff;
     }
-    .unit{
+
+    /* BOTONES DE UNIDAD (KILO/CIENTO/UNIDAD/FRASCO) */
+    .unitBtns{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 10px}
+    .uBtn{
       border:1px solid var(--border);
-      border-radius:12px;
-      padding:10px 10px;
-      font-size:13px;
       background:#fff;
-      min-width:170px;
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 8px 18px rgba(15,23,42,.05);
     }
+    .uBtn.active{
+      border-color: rgba(22,163,74,.35);
+      background: rgba(22,163,74,.08);
+      color: #0b3b1a;
+    }
+
     .add{
       flex:1 1 auto;
       border:0;
       border-radius:12px;
       padding:10px 12px;
       cursor:pointer;
-      background:#0f172a;
+      background:var(--dark);
       color:#fff;
-      font-weight:800;
+      font-weight:900;
       font-size:13px;
     }
     .add:hover{filter:brightness(1.05)}
-    .small{font-size:11px;color:var(--muted);margin-top:8px}
 
     .cartBox h4{margin:0 0 10px;font-size:16px}
-    .cartList{display:flex; flex-direction:column; gap:10px; margin-top:10px}
+    .cartList{display:flex; flex-direction:column; gap:10px; margin-top:10px; max-height:360px; overflow:auto}
     .cartItem{
       border:1px solid var(--border);
       border-radius:14px;
@@ -213,7 +227,8 @@
       border-radius:10px;
       padding:6px 8px;
       cursor:pointer;
-      font-weight:800;
+      font-weight:900;
+      color:var(--danger);
     }
     .total{
       display:flex; justify-content:space-between; align-items:center;
@@ -222,6 +237,7 @@
       gap:10px;
     }
     .total strong{font-size:18px}
+
     footer{
       border-top:1px solid var(--border);
       margin-top:22px;
@@ -247,9 +263,10 @@
     </div>
 
     <div class="actions">
-      <div class="pill" id="hoursPill">Horario: 8.30 a.m – 8.30 p.m</div>
+      <div class="pill">Horario: 8.30 a.m – 8.30 p.m</div>
       <div class="pill" id="cartCountPill">Carrito: 0</div>
       <a class="btn secondary" id="fbBtn" target="_blank" rel="noopener">Facebook</a>
+      <!-- BOTÓN ARRIBA: ENVÍO -->
       <button class="btn" id="sendBtn">Enviar pedido</button>
     </div>
   </div>
@@ -268,7 +285,7 @@
         <div class="chip">Atención el mismo día</div>
       </div>
       <p class="small">
-        Tip: Si un producto es por kilo, puedes pedir 0.5, 1, 2 kilos, etc. Si es por ciento, coloca 1 = un ciento.
+        Tip: KILO permite 0.5, 1, 2… En CIENTO/UNIDAD/FRASCO usa números enteros.
       </p>
     </div>
 
@@ -276,9 +293,10 @@
       <h4>Carrito</h4>
       <div class="total">
         <div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600;">Total estimado</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:700;">Total estimado</div>
           <strong id="totalText">S/. 0.00</strong>
         </div>
+        <!-- BOTÓN APARTE EN CARRITO -->
         <button class="btn" id="waBtn">WhatsApp</button>
       </div>
       <div class="cartList" id="cartList"></div>
@@ -314,9 +332,7 @@
   const WHATSAPP = "973491877"; // sin +51
   const FACEBOOK_URL = "https://www.facebook.com/share/1AfKvrai1R/?mibextid=wwXIfr";
 
-  // Para evitar problemas por espacios en nombres, usamos encodeURI() al cargar imágenes.
-
-  // ========= IMÁGENES (NOMBRES EXACTOS COMO TU LISTA) =========
+  // ========= IMÁGENES (NOMBRES EXACTOS + ajipili.png) =========
   const IMAGES = {
     logo: "img/logo.png",
 
@@ -334,12 +350,16 @@
     papaya: "img/papaya.png",
     platano_isla_rojo: "img/platano_isla rojo.png",
     platano_isla: "img/platano_isla.png",
-    platano_seda: "img/platano_seda.png"
+    platano_seda: "img/platano_seda.png",
+
     ajipili: "img/ajipili.png"
   };
 
-  // ========= PRODUCTOS =========
-  // unitOptions permite seleccionar: kilo/ciento/unidad/frasco según aplique
+  // encodeURI mantiene el nombre tal cual (con espacios), pero lo hace URL-safe
+  const safeImg = (p)=> encodeURI(p);
+
+  // ========= PRODUCTOS (BOTONES DE UNIDAD) =========
+  // unitOptions => botones (KILO/CIENTO/UNIDAD/FRASCO)
   const PRODUCTS = [
     {
       id:"platano_seda", name:"Plátano seda", cat:"platano",
@@ -389,7 +409,7 @@
     { id:"mango_haden", name:"Mango Haden", cat:"fruta", img: IMAGES.mango_haden,
       unitOptions:[{ key:"kilo", label:"KILO", price:4.00 }]
     },
-    // No subiste imagen "mango comun", así que uso la de Mango Haden para que no salga roto.
+    // No subiste imagen de mango común: uso la de Mango Haden para no romper
     { id:"mango_comun", name:"Mango común", cat:"fruta", img: IMAGES.mango_haden,
       unitOptions:[{ key:"kilo", label:"KILO", price:3.00 }]
     },
@@ -421,8 +441,7 @@
       unitOptions:[{ key:"kilo", label:"KILO", price:4.00 }]
     },
 
-    },
-    { id:"aji_pilis", name:"Ají pilis", cat:"otros", img: IMAGE.ajipili,
+    { id:"aji_pilis", name:"Ají pilis", cat:"otros", img: IMAGES.ajipili,
       unitOptions:[{ key:"frasco", label:"FRASCO", price:5.00 }]
     }
   ];
@@ -437,7 +456,6 @@
     if(u==="frasco") return `${money(opt.price)} SOLES EL FRASCO`;
     return `${money(opt.price)}`;
   };
-  const safeImg = (p)=> encodeURI(p); // mantiene los nombres tal cual, pero los hace URL-safe
 
   // ========= ESTADO =========
   let cart = []; // {id, name, unitKey, unitLabel, price, qty, lineTotal}
@@ -454,11 +472,10 @@
   const fbBtn = document.getElementById("fbBtn");
   const logoImg = document.getElementById("logoImg");
 
-  // Set links / assets
   fbBtn.href = FACEBOOK_URL;
   logoImg.src = safeImg(IMAGES.logo);
 
-  // ========= RENDER CATÁLOGO =========
+  // ========= FILTRO =========
   function filteredProducts(){
     return PRODUCTS.filter(p=>{
       const okQ = (p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
@@ -467,6 +484,7 @@
     });
   }
 
+  // ========= CATÁLOGO =========
   function renderCatalog(){
     const list = filteredProducts();
     catalogEl.innerHTML = "";
@@ -490,60 +508,75 @@
       name.className = "name";
       name.textContent = p.name;
 
-      // Texto de precios (muestra todas las opciones)
       const price = document.createElement("p");
       price.className = "price";
       price.innerHTML = p.unitOptions.map(o => `• <strong>${labelPrice(o)}</strong>`).join("<br>");
+
+      // BOTONES DE UNIDAD (en vez de select)
+      const unitBtns = document.createElement("div");
+      unitBtns.className = "unitBtns";
+
+      // default: si existe kilo => kilo, si no => primera opción
+      let activeUnitKey = p.unitOptions.some(o=>o.key==="kilo") ? "kilo" : p.unitOptions[0].key;
+
+      function renderUnitButtons(){
+        unitBtns.innerHTML = "";
+        p.unitOptions.forEach(o=>{
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "uBtn" + (o.key===activeUnitKey ? " active" : "");
+          b.textContent = o.label;
+          b.title = labelPrice(o);
+          b.addEventListener("click", ()=>{
+            activeUnitKey = o.key;
+            renderUnitButtons();
+            adjustQtyStep();
+          });
+          unitBtns.appendChild(b);
+        });
+      }
 
       const row = document.createElement("div");
       row.className = "row";
 
       const qty = document.createElement("input");
       qty.type = "number";
-      qty.min = "0";
-      qty.step = "0.1";
-      qty.value = (p.unitOptions.some(o=>o.key==="unidad"||o.key==="ciento"||o.key==="frasco")) ? "1" : "1";
+      qty.value = "1";
       qty.className = "qty";
       qty.placeholder = "Cantidad";
 
-      const unit = document.createElement("select");
-      unit.className = "unit";
-      p.unitOptions.forEach(o=>{
-        const opt = document.createElement("option");
-        opt.value = o.key;
-        opt.textContent = `Comprar por ${o.label}`;
-        unit.appendChild(opt);
-      });
-
-      // Ajusta step según unidad
-      function adjustStep(){
-        const uk = unit.value;
-        if(uk==="kilo"){ qty.step="0.1"; qty.min="0.1"; if(Number(qty.value)<=0) qty.value="1"; }
-        else { qty.step="1"; qty.min="1"; qty.value = String(Math.max(1, Math.round(Number(qty.value)||1))); }
+      function adjustQtyStep(){
+        const uk = activeUnitKey;
+        if(uk==="kilo"){
+          qty.step = "0.1";
+          qty.min = "0.1";
+          if(!qty.value || Number(qty.value)<=0) qty.value = "1";
+        }else{
+          qty.step = "1";
+          qty.min = "1";
+          const v = Number(qty.value);
+          qty.value = String(Math.max(1, Math.round(Number.isFinite(v)?v:1)));
+        }
       }
-      unit.addEventListener("change", adjustStep);
-      adjustStep();
 
       const add = document.createElement("button");
       add.className = "add";
       add.textContent = "Agregar";
 
       add.addEventListener("click", ()=>{
-        const uk = unit.value;
-        const opt = p.unitOptions.find(o=>o.key===uk);
+        const opt = p.unitOptions.find(o=>o.key===activeUnitKey);
         if(!opt) return;
 
         let n = Number(qty.value);
         if(!Number.isFinite(n) || n<=0) return;
 
-        if(uk!=="kilo") n = Math.round(n); // unidad/ciento/frasco enteros
-
+        if(activeUnitKey!=="kilo") n = Math.round(n); // entero para unidad/ciento/frasco
         const lineTotal = opt.price * n;
 
         cart.push({
           id:p.id,
           name:p.name,
-          unitKey: uk,
+          unitKey: activeUnitKey,
           unitLabel: opt.label,
           price: opt.price,
           qty: n,
@@ -552,18 +585,21 @@
         renderCart();
       });
 
+      renderUnitButtons();
+      adjustQtyStep();
+
       row.appendChild(qty);
-      row.appendChild(unit);
       row.appendChild(add);
 
       const small = document.createElement("div");
       small.className = "small";
-      small.textContent = (p.unitOptions.some(o=>o.key==="ciento") && p.unitOptions.some(o=>o.key==="unidad"))
-        ? "Tip: 1 = una unidad / 1 = un ciento (según lo que elijas)."
+      small.textContent = p.unitOptions.length > 1
+        ? "Elige KILO / CIENTO / UNIDAD (según corresponda) y luego pon cantidad."
         : " ";
 
       content.appendChild(name);
       content.appendChild(price);
+      content.appendChild(unitBtns);
       content.appendChild(row);
       content.appendChild(small);
 
@@ -573,13 +609,12 @@
     });
   }
 
-  // ========= RENDER CARRITO =========
+  // ========= CARRITO =========
   function renderCart(){
     cartListEl.innerHTML = "";
 
     const total = cart.reduce((a,b)=>a + b.lineTotal, 0);
     totalTextEl.textContent = money(total);
-
     cartCountPill.textContent = `Carrito: ${cart.length}`;
 
     if(cart.length===0){
@@ -646,6 +681,7 @@
     window.open(url, "_blank");
   }
 
+  // Botón arriba y botón en carrito (separados) => ambos envían WhatsApp
   waBtn.addEventListener("click", openWhatsApp);
   sendBtn.addEventListener("click", openWhatsApp);
 
